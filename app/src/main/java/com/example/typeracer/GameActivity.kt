@@ -9,9 +9,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import kotlinx.android.synthetic.main.nav_header_main.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 const val EXTRA_MESSAGE = "com.example.typeracer.MESSAGE"
 
+private var timeStart = System.currentTimeMillis()
 
 class GameActivity : AppCompatActivity() {
 
@@ -54,14 +57,25 @@ class GameActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        resetTime()
+
     }
 
+    /** Reset startTime of the activity */
+    private fun resetTime() {
+        timeStart = System.currentTimeMillis()
+    }
 
-    fun sentGameOver() {
-        val message = "GameOver Screen"
+    /** Start new activity with the time the user took to complete the game.*/
+    private fun sentGameOver() {
+        val timeEnd = System.currentTimeMillis()
+        val message = (timeEnd - timeStart).toString()
+
         val intent = Intent(this, GameOverActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, message)
         }
         startActivity(intent)
     }
+
 }
