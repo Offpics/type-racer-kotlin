@@ -6,7 +6,7 @@ import android.support.annotation.WorkerThread
 
 class WPMRepository(private val wpmDao: WPMDao) {
 
-    val allWords: LiveData<List<WPM>> = wpmDao.getAllWpms()
+    val allWpms: LiveData<List<WPM>> = wpmDao.getAllWpms()
 
     @WorkerThread
     suspend fun insert(wpm: WPM) {
