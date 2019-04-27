@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // Handle the camera action
             }
             R.id.nav_gallery -> {
+                goLeaderboards()
 
             }
             R.id.nav_slideshow -> {
@@ -97,4 +98,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(intent)
     }
 
+    fun goLeaderboards() {
+        val intent = Intent(this, LeaderboardActivity::class.java)
+        startActivity(intent)
+    }
 }
