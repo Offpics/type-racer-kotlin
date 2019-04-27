@@ -1,22 +1,22 @@
 package com.example.typeracer
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.android.synthetic.main.nav_header_main.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.example.typeracer.data.WPM
+import com.example.typeracer.viewmodels.WPMViewModel
 
 const val EXTRA_MESSAGE = "com.example.typeracer.MESSAGE"
 
 private var timeStart = System.currentTimeMillis()
 
 class GameActivity : AppCompatActivity() {
+
 
 //    Data class for a quote
     data class Quote(
@@ -77,5 +77,7 @@ class GameActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
+
 
 }

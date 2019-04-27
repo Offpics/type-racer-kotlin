@@ -31,7 +31,7 @@ class WPMListAdapter internal constructor(
         holder.wpmItemView.text = current.wpm
     }
 
-    internal fun setWpms(words: List<WPM>) {
+    internal fun setWpms(wpms: List<WPM>) {
         this.wpms = wpms
         notifyDataSetChanged()
     }

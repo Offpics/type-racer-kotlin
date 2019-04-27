@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "wpm_table")
 class WPM(
-    @PrimaryKey(autoGenerate = true) var id: Int,
-    val wpm: String
+    @PrimaryKey val wpm: String
+//    @PrimaryKey(autoGenerate = true) var id: Int,
+//    val wpm: String
 )
