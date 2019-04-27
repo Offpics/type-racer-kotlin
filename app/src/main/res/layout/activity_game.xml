@@ -12,4 +12,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" tools:layout_editor_absoluteY="66dp"
             tools:layout_editor_absoluteX="176dp" android:id="@+id/textView2"/>
+    <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="155dp"
+            tools:layout_editor_absoluteX="161dp" android:id="@+id/button" android:onClick="sentGameOver"/>
 </android.support.constraint.ConstraintLayout>
