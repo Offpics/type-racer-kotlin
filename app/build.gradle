@@ -47,6 +47,9 @@ dependencies {
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.1'
 }
 
 kotlin {
@@ -54,3 +57,5 @@ kotlin {
         coroutines "enable"
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
