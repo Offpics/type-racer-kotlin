@@ -4,13 +4,17 @@ import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.NavUtils
+import android.util.Log
 import android.widget.TextView
 import com.example.typeracer.data.WPM
 import com.example.typeracer.viewmodels.WPMViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class GameOverActivity : AppCompatActivity() {
 
     private lateinit var wpmViewModel: WPMViewModel
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +26,36 @@ class GameOverActivity : AppCompatActivity() {
             text = message
         }
 
+        // Insert score into the local database
         wpmViewModel = ViewModelProviders.of(this).get(WPMViewModel::class.java)
         val score = WPM(message)
-
         wpmViewModel.insert(score)
+
+
+        // Insert score into the online database
+        if (isUserSignedIn()) {
+            // Firestore
+            firestore = FirebaseFirestore.getInstance()
+
+
+            // Create a new score
+            val newScore = HashMap<String, Any>()
+            newScore["wpm"] = message
+
+
+            // Add a new document with a generated ID
+            firestore.collection("scores").add(newScore)
+
+        }
     }
 
     /** On back button pressed go to ParentActivity, which is MainActivity. */
     override fun onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);
+    }
+
+    private fun isUserSignedIn(): Boolean {
+        return FirebaseAuth.getInstance().currentUser != null
     }
 
 }

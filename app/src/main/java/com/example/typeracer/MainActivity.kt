@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (FirebaseAuth.getInstance().currentUser != null) {
             val TextView = findViewById<TextView>(R.id.textView3).apply {
-                text = "Signed in!"
+                text = FirebaseAuth.getInstance().currentUser?.displayName
             }
         }
 
