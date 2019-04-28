@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,6 +37,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            val TextView = findViewById<TextView>(R.id.textView3).apply {
+                text = "Signed in!"
+            }
+        }
 
         navView.setNavigationItemSelectedListener(this)
     }
@@ -75,6 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_slideshow -> {
+                goOnline()
 
             }
             R.id.nav_tools -> {
@@ -100,6 +109,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun goLeaderboards() {
         val intent = Intent(this, LeaderboardActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goOnline() {
+        val intent = Intent(this, OnlineActivity::class.java)
         startActivity(intent)
     }
 }
