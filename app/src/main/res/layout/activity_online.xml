@@ -7,4 +7,11 @@
         android:layout_height="match_parent"
         tools:context=".OnlineActivity">
 
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerOnline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            tools:listitem="@layout/recyclerview_item" />
+
 </android.support.constraint.ConstraintLayout>

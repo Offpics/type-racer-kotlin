@@ -4,19 +4,38 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.example.typeracer.adapters.OnlineAdapter
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.activity_online.*
 
 class OnlineActivity : AppCompatActivity() {
+
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var query: Query
+
+    lateinit var adapter: OnlineAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_online)
+
+        firestore = FirebaseFirestore.getInstance()
+
+        query = firestore.collection("scores").orderBy("wpm", Query.Direction.ASCENDING).limit(LIMIT.toLong())
+
+        adapter = object: OnlineAdapter(query) {}
+
+        recyclerOnline.layoutManager = LinearLayoutManager(this)
+        recyclerOnline.adapter = adapter
+
 
     }
 
@@ -28,6 +47,13 @@ class OnlineActivity : AppCompatActivity() {
             startSignIn()
             return
         }
+
+        adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -81,5 +107,7 @@ class OnlineActivity : AppCompatActivity() {
     companion object {
 
         private const val RC_SIGN_IN = 9001
+
+        private const val LIMIT = 50
     }
 }
