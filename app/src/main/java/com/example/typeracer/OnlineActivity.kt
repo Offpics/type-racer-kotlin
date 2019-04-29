@@ -4,9 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.typeracer.adapters.OnlineAdapter
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -43,10 +45,10 @@ class OnlineActivity : AppCompatActivity() {
         super.onStart()
 
         // Start sign in if necessary
-        if (shouldStartSignIn()) {
-            startSignIn()
-            return
-        }
+//        if (shouldStartSignIn()) {
+//            startSignIn()
+//            return
+//        }
 
         adapter.startListening()
     }
@@ -57,14 +59,26 @@ class OnlineActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.online_menu, menu)
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            menuInflater.inflate(R.menu.signedin_menu, menu)
+        } else {
+            menuInflater.inflate(R.menu.signedout_menu, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_signout -> {
-                AuthUI.getInstance().signOut(this)
+                AuthUI.getInstance().signOut(this).addOnCompleteListener{
+                    invalidateOptionsMenu()
+                    Toast.makeText(this, "Succesfully signed out!", Toast.LENGTH_LONG).show()
+                }
+//                startSignIn()
+//                recreate()
+//                invalidateOptionsMenu()
+            }
+            R.id.action_signin -> {
                 startSignIn()
             }
         }
@@ -86,6 +100,8 @@ class OnlineActivity : AppCompatActivity() {
 //                    showSignInErrorDialog(R.string.message_unknown)
                 }
             }
+            invalidateOptionsMenu()
+            Toast.makeText(this, "Succesfully signed in!", Toast.LENGTH_LONG).show()
         }
     }
 

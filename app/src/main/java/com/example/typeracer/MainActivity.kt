@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
-import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,11 +37,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        if (FirebaseAuth.getInstance().currentUser != null) {
-            val TextView = findViewById<TextView>(R.id.textView3).apply {
-                text = FirebaseAuth.getInstance().currentUser?.displayName
-            }
-        }
+        val textView: TextView = findViewById(R.id.textview_welcome)
+        textView.text = "ELDO"
+//        if (FirebaseAuth.getInstance().currentUser != null) {
+//            val TextView = findViewById<TextView>(R.id.textview_welcome).apply {
+//                text = FirebaseAuth.getInstance().currentUser?.displayName
+//            }
+//        }
+
+//        Log.d("1000", FirebaseAuth.getInstance().currentUser?.email)
+//        Log.d("1000", FirebaseAuth.getInstance().currentUser?.displayName)
 
         navView.setNavigationItemSelectedListener(this)
     }
@@ -75,24 +79,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
-            }
             R.id.nav_gallery -> {
-                goLeaderboards()
+                startLeaderboardActivity()
 
             }
             R.id.nav_slideshow -> {
-                goOnline()
-
-            }
-            R.id.nav_tools -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
+                startOnlineActivity()
 
             }
         }
@@ -107,12 +99,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(intent)
     }
 
-    fun goLeaderboards() {
+    fun startLeaderboardActivity() {
         val intent = Intent(this, LeaderboardActivity::class.java)
         startActivity(intent)
     }
 
-    fun goOnline() {
+    fun startOnlineActivity() {
         val intent = Intent(this, OnlineActivity::class.java)
         startActivity(intent)
     }

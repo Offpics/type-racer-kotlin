@@ -1,6 +1,5 @@
 package com.example.typeracer
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,8 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
-import com.example.typeracer.data.WPM
-import com.example.typeracer.viewmodels.WPMViewModel
 
 const val EXTRA_MESSAGE = "com.example.typeracer.MESSAGE"
 
@@ -40,11 +37,10 @@ class GameActivity : AppCompatActivity() {
 
         randomizeQuotes()
         currentQuote = quotes[0]
-        val TextView2 = findViewById<TextView>(R.id.textView2).apply {
-            text = currentQuote.text
-        }
+        val textView: TextView = findViewById(R.id.textview_quote)
+        textView.text = currentQuote.text
 
-        val editText = findViewById<EditText>(R.id.editText)
+        val editText = findViewById<EditText>(R.id.edittext_game)
 
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

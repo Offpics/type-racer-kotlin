@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            tools:listitem="@layout/recyclerview_item" />
+            tools:listitem="@layout/recyclerview_item" tools:layout_editor_absoluteY="151dp"
+            tools:layout_editor_absoluteX="-37dp"/>
 
 </android.support.constraint.ConstraintLayout>

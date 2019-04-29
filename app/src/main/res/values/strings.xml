@@ -13,4 +13,9 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="sample_text">Sample Text</string>
+    <string name="score_wpm">Score: WPM</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="offline_leaderboards">Offline Leaderboards</string>
+    <string name="online_leaderboards">Online Leaderboards</string>
 </resources>
