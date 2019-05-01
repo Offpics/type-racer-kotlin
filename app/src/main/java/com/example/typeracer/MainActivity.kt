@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,11 +42,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val textView: TextView = findViewById(R.id.textview_welcome)
         textView.text = "ELDO"
-//        if (FirebaseAuth.getInstance().currentUser != null) {
-//            val TextView = findViewById<TextView>(R.id.textview_welcome).apply {
-//                text = FirebaseAuth.getInstance().currentUser?.displayName
-//            }
-//        }
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            val headerView: View = nav_view.getHeaderView(0)
+            headerView.textview_email.text = FirebaseAuth.getInstance().currentUser?.email
+        }
 
 //        Log.d("1000", FirebaseAuth.getInstance().currentUser?.email)
 //        Log.d("1000", FirebaseAuth.getInstance().currentUser?.displayName)
