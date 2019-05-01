@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 
@@ -21,8 +22,9 @@ class GameActivity : AppCompatActivity() {
     )
 
     private val quotes: MutableList<Quote> = mutableListOf(
-        Quote(text="Alice"),
-        Quote(text="Bob")
+        Quote(text="This is a test sentence.")
+//        Quote(text="Alice"),
+//        Quote(text="Bob")
     )
 
     private fun randomizeQuotes() {
@@ -40,18 +42,32 @@ class GameActivity : AppCompatActivity() {
         val textView: TextView = findViewById(R.id.textview_quote)
         textView.text = currentQuote.text
 
+        // Split current quote into list of words.
+        val splitText = currentQuote.text.split("\\s+".toRegex())
+        Log.d("GameActivity", splitText[0])
+        var currentIndex = 0
+
         val editText = findViewById<EditText>(R.id.edittext_game)
 
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString() == currentQuote.text) {
-                    sentGameOver()
+//                if (s.toString() == currentQuote.text) {
+//                    sentGameOver()
+//                }
+                if (s.toString() == (splitText[currentIndex] + " ")) {
+                    editText.text.clear()
+                    currentIndex = currentIndex.inc()
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (splitText.size == currentIndex) {
+                    Log.d("afterTextChanged", splitText.size.toString())
+                    sentGameOver(splitText.size)
+                }
+            }
         })
 
         resetTime()
@@ -64,9 +80,16 @@ class GameActivity : AppCompatActivity() {
     }
 
     /** Start new activity with the time the user took to complete the game.*/
-    private fun sentGameOver() {
+    private fun sentGameOver(splitTextSize: Int) {
+        Log.d("sentGameOver", splitTextSize.toString())
         val timeEnd = System.currentTimeMillis()
-        val message = (timeEnd - timeStart).toString()
+        val seconds = (timeEnd - timeStart)
+        Log.d("sentGameOver", seconds.toString())
+
+        val wpm: Long = (splitTextSize * 60000) / seconds
+        val message = wpm.toString()
+
+        Log.d("GameActivity", wpm.toString())
 
         val intent = Intent(this, GameOverActivity::class.java).apply {
             putExtra(EXTRA_MESSAGE, message)
