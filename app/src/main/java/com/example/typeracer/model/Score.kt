@@ -8,10 +8,12 @@ import com.google.firebase.firestore.IgnoreExtraProperties
  */
 @IgnoreExtraProperties
 data class Score(
-    var wpm: String? = null
+    var wpm: String? = null,
+    var email: String? = null
 ) {
     companion object {
 
         const val FIELD_WPM = "wpm"
+        const val FIELD_EMAIL = "email"
     }
 }

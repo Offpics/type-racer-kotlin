@@ -40,6 +40,7 @@ class GameOverActivity : AppCompatActivity() {
             // Create a new score
             val newScore = HashMap<String, Any>()
             newScore["wpm"] = message
+            newScore["email"] = FirebaseAuth.getInstance().currentUser?.email.toString()
 
 
             // Add a new document with a generated ID

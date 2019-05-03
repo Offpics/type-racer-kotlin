@@ -1,7 +1,6 @@
 package com.example.typeracer.adapters
 
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,9 @@ import com.example.typeracer.R
 import com.example.typeracer.model.Score
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.recyclerview_item.view.*
+import kotlinx.android.synthetic.main.leaderboardactivity_item.view.*
+import kotlinx.android.synthetic.main.leaderboardactivity_item.view.textView5
+import kotlinx.android.synthetic.main.onlineactivity_item.view.*
 
 
 /**
@@ -21,7 +22,7 @@ open class OnlineAdapter(query: Query) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(inflater.inflate(R.layout.recyclerview_item, parent, false))
+        return ViewHolder(inflater.inflate(R.layout.onlineactivity_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,6 +41,7 @@ open class OnlineAdapter(query: Query) :
             }
 
             itemView.textView5.text = score.wpm
+            itemView.textView6.text = score.email
 
 
         }

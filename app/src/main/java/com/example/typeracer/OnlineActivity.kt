@@ -31,7 +31,7 @@ class OnlineActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
 
-        query = firestore.collection("scores").orderBy("wpm", Query.Direction.ASCENDING).limit(LIMIT.toLong())
+        query = firestore.collection("scores").orderBy("wpm", Query.Direction.DESCENDING).limit(LIMIT.toLong())
 
         adapter = object: OnlineAdapter(query) {}
 
