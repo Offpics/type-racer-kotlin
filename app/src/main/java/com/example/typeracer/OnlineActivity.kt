@@ -38,6 +38,7 @@ class OnlineActivity : AppCompatActivity() {
         recyclerOnline.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         recyclerOnline.adapter = adapter
 
+        supportActionBar?.title = "Leaderboards"
 
     }
 

@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            tools:listitem="@layout/onlineactivity_item" tools:layout_editor_absoluteY="151dp"
-            tools:layout_editor_absoluteX="-37dp"/>
+            tools:listitem="@layout/onlineactivity_item" tools:layout_editor_absoluteY="16dp"
+            tools:layout_editor_absoluteX="-16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
