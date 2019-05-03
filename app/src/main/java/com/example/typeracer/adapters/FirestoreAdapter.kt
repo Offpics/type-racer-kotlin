@@ -1,6 +1,6 @@
 package com.example.typeracer.adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
@@ -18,8 +18,8 @@ import java.util.ArrayList
  * [DocumentSnapshot.toObject] is not cached so the same object may be deserialized
  * many times as the user scrolls.
  */
-abstract class FirestoreAdapter<VH : RecyclerView.ViewHolder>(private var query: Query?) :
-    RecyclerView.Adapter<VH>(),
+abstract class FirestoreAdapter<VH : androidx.recyclerview.widget.RecyclerView.ViewHolder>(private var query: Query?) :
+    androidx.recyclerview.widget.RecyclerView.Adapter<VH>(),
     EventListener<QuerySnapshot> {
 
     private var registration: ListenerRegistration? = null

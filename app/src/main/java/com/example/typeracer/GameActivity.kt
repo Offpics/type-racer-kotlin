@@ -1,13 +1,18 @@
 package com.example.typeracer
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.Color.rgb
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.text.bold
+import androidx.core.text.color
 
 const val EXTRA_MESSAGE = "com.example.typeracer.MESSAGE"
 
@@ -22,9 +27,8 @@ class GameActivity : AppCompatActivity() {
     )
 
     private val quotes: MutableList<Quote> = mutableListOf(
-        Quote(text="This is a test sentence.")
-//        Quote(text="Alice"),
-//        Quote(text="Bob")
+        Quote(text="This is a test sentence."),
+        Quote(text="This is a second test sentence.")
     )
 
     private fun randomizeQuotes() {
@@ -32,6 +36,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     lateinit var currentQuote: Quote
+    lateinit var tmp: SpannableStringBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,8 @@ class GameActivity : AppCompatActivity() {
         randomizeQuotes()
         currentQuote = quotes[0]
         val textView: TextView = findViewById(R.id.textview_quote)
+
+
         textView.text = currentQuote.text
 
         // Split current quote into list of words.
@@ -49,17 +56,34 @@ class GameActivity : AppCompatActivity() {
 
         val editText = findViewById<EditText>(R.id.edittext_game)
 
+
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                if (s.toString() == currentQuote.text) {
-//                    sentGameOver()
-//                }
+                // Check wheter to clear editText when word is completed.
                 if (s.toString() == (splitText[currentIndex] + " ")) {
+                    // Clear editText after word is completed.
                     editText.text.clear()
+
+                    // Reset SpannableStringBuilder.
+                    tmp = SpannableStringBuilder()
+
+                    // If word is completed color it green, otherwise keep it without modifications.
+                    for ((index, text) in splitText.withIndex()) {
+                        if (index <= currentIndex) {
+                            tmp.color(rgb(0,204,0)) { append("$text ")}
+                        } else {
+                            tmp.append("$text ")
+                        }
+                    }
+
+                    // Update textView with new colored String.
+                    textView.text = tmp
+
                     currentIndex = currentIndex.inc()
                 }
+
             }
 
             override fun afterTextChanged(s: Editable?) {

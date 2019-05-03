@@ -1,9 +1,9 @@
 package com.example.typeracer
 
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.NavUtils
+import androidx.core.app.NavUtils
 import android.widget.TextView
 import com.example.typeracer.data.WPM
 import com.example.typeracer.viewmodels.WPMViewModel

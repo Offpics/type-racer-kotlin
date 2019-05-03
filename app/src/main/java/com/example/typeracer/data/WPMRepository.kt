@@ -1,7 +1,7 @@
 package com.example.typeracer.data
 
-import android.arch.lifecycle.LiveData
-import android.support.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.annotation.WorkerThread
 
 
 class WPMRepository(private val wpmDao: WPMDao) {
