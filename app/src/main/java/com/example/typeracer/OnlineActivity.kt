@@ -37,7 +37,7 @@ class OnlineActivity : AppCompatActivity() {
         recyclerOnline.layoutManager = LinearLayoutManager(this)
         recyclerOnline.adapter = adapter
 
-        supportActionBar?.title = "Leaderboards"
+        supportActionBar?.title = "Online Leaderboards"
 
     }
 

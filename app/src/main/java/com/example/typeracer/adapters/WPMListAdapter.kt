@@ -17,6 +17,7 @@ class WPMListAdapter internal constructor(
     private var wpms = emptyList<WPM>() // Cached copy of words
 
     inner class WPMViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        val wpmPosition: TextView = itemView.findViewById(R.id.textView7)
         val wpmItemView: TextView = itemView.findViewById(R.id.textView5)
     }
 
@@ -28,6 +29,7 @@ class WPMListAdapter internal constructor(
     override fun onBindViewHolder(holder: WPMViewHolder, position: Int) {
         val current = wpms[position]
         holder.wpmItemView.text = current.wpm
+        holder.wpmPosition.text = (position + 1).toString()
     }
 
     internal fun setWpms(wpms: List<WPM>) {

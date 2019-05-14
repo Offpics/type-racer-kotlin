@@ -53,12 +53,15 @@ abstract class WPMRoomDatabase : RoomDatabase() {
         fun populateDatabase(wpmDao: WPMDao) {
             wpmDao.deleteAll()
 
-            var wpm = WPM(0, "33")
-            wpmDao.insert(wpm)
-            wpm = WPM(0, "33")
-            wpmDao.insert(wpm)
-            wpm = WPM(0, "34")
-            wpmDao.insert(wpm)
+            var wpm: WPM
+
+            val scores = listOf("50", "45", "40", "35", "30", "60")
+
+            for (score in scores) {
+                wpm = WPM(0, score)
+                wpmDao.insert(wpm)
+            }
+
         }
     }
 

@@ -27,5 +27,7 @@ class LeaderboardActivity : AppCompatActivity() {
         wpmViewModel.allWpms.observe(this, Observer { wpms ->
             wpms?.let { adapter.setWpms(it) }
         })
+
+        supportActionBar?.title = "Offline Leaderboards"
     }
 }
