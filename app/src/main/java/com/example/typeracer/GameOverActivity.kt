@@ -28,7 +28,7 @@ class GameOverActivity : AppCompatActivity() {
 
         // Insert score into the local database
         wpmViewModel = ViewModelProviders.of(this).get(WPMViewModel::class.java)
-        val score = WPM(message)
+        val score = WPM(0, message)
         wpmViewModel.insert(score)
 
 

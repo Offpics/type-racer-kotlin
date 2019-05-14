@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [WPM::class], version = 1)
+@Database(entities = [WPM::class], version = 2)
 abstract class WPMRoomDatabase : RoomDatabase() {
 
     abstract fun wpmDao(): WPMDao
@@ -30,7 +30,7 @@ abstract class WPMRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     WPMRoomDatabase::class.java,
                     "Wpm_database"
-                ).addCallback(WPMDatabaseCallback(scope)).build()
+                ).addCallback(WPMDatabaseCallback(scope)).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
@@ -44,7 +44,7 @@ abstract class WPMRoomDatabase : RoomDatabase() {
                 super.onOpen(db)
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-//                        populateDatabase(database.wpmDao())
+                        populateDatabase(database.wpmDao())
                     }
                 }
             }
@@ -53,9 +53,11 @@ abstract class WPMRoomDatabase : RoomDatabase() {
         fun populateDatabase(wpmDao: WPMDao) {
             wpmDao.deleteAll()
 
-            var wpm = WPM("Hello")
+            var wpm = WPM(0, "33")
             wpmDao.insert(wpm)
-            wpm = WPM("World!")
+            wpm = WPM(0, "33")
+            wpmDao.insert(wpm)
+            wpm = WPM(0, "34")
             wpmDao.insert(wpm)
         }
     }

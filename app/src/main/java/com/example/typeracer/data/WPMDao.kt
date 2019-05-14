@@ -9,7 +9,7 @@ import androidx.room.Query
 @Dao
 interface WPMDao {
 
-    @Query("SELECT * from wpm_table ORDER BY wpm ASC")
+    @Query("SELECT * from wpm_table ORDER BY wpm DESC")
     fun getAllWpms(): LiveData<List<WPM>>
 
     @Insert
