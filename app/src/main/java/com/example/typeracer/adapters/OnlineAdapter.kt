@@ -9,7 +9,6 @@ import com.example.typeracer.R
 import com.example.typeracer.model.Score
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.leaderboardactivity_item.view.*
 import kotlinx.android.synthetic.main.leaderboardactivity_item.view.textView5
 import kotlinx.android.synthetic.main.onlineactivity_item.view.*
 
@@ -37,10 +36,7 @@ open class OnlineAdapter(query: Query) :
 
         fun bind(snapshot: DocumentSnapshot, position: Int) {
 
-            val score = snapshot.toObject(Score::class.java)
-            if (score == null) {
-                return
-            }
+            val score = snapshot.toObject(Score::class.java) ?: return
 
             itemView.textView5.text = score.wpm
             itemView.textView6.text = score.email

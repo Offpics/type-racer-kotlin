@@ -1,9 +1,7 @@
 package com.example.typeracer
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.Color.rgb
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableStringBuilder
@@ -11,7 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.text.bold
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.color
 
 const val EXTRA_MESSAGE = "com.example.typeracer.MESSAGE"
@@ -35,7 +33,7 @@ class GameActivity : AppCompatActivity() {
         quotes.shuffle()
     }
 
-    lateinit var currentQuote: Quote
+    private lateinit var currentQuote: Quote
     lateinit var tmp: SpannableStringBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {

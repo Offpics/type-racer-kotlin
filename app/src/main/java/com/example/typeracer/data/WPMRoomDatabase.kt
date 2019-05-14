@@ -10,8 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = arrayOf(WPM::class), version = 1)
-public abstract class WPMRoomDatabase : RoomDatabase() {
+@Database(entities = [WPM::class], version = 1)
+abstract class WPMRoomDatabase : RoomDatabase() {
 
     abstract fun wpmDao(): WPMDao
 

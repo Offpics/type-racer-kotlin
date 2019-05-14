@@ -1,15 +1,10 @@
 package com.example.typeracer.adapters
 
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentSnapshot
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
-import java.util.ArrayList
+import java.util.*
 
 /**
  * RecyclerView adapter for displaying the results of a Firestore [Query].
@@ -18,8 +13,8 @@ import java.util.ArrayList
  * [DocumentSnapshot.toObject] is not cached so the same object may be deserialized
  * many times as the user scrolls.
  */
-abstract class FirestoreAdapter<VH : androidx.recyclerview.widget.RecyclerView.ViewHolder>(private var query: Query?) :
-    androidx.recyclerview.widget.RecyclerView.Adapter<VH>(),
+abstract class FirestoreAdapter<VH : RecyclerView.ViewHolder>(private var query: Query?) :
+    RecyclerView.Adapter<VH>(),
     EventListener<QuerySnapshot> {
 
     private var registration: ListenerRegistration? = null

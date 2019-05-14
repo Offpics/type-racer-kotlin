@@ -2,13 +2,12 @@ package com.example.typeracer
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.typeracer.adapters.OnlineAdapter
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -23,7 +22,7 @@ class OnlineActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var query: Query
 
-    lateinit var adapter: OnlineAdapter
+    private lateinit var adapter: OnlineAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class OnlineActivity : AppCompatActivity() {
 
         adapter = object: OnlineAdapter(query) {}
 
-        recyclerOnline.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        recyclerOnline.layoutManager = LinearLayoutManager(this)
         recyclerOnline.adapter = adapter
 
         supportActionBar?.title = "Leaderboards"
@@ -104,10 +103,6 @@ class OnlineActivity : AppCompatActivity() {
             invalidateOptionsMenu()
             Toast.makeText(this, "Succesfully signed in!", Toast.LENGTH_LONG).show()
         }
-    }
-
-    private fun shouldStartSignIn(): Boolean {
-        return FirebaseAuth.getInstance().currentUser == null
     }
 
     private fun startSignIn() {

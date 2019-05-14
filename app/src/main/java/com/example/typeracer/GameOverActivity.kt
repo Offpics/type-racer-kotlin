@@ -21,9 +21,10 @@ class GameOverActivity : AppCompatActivity() {
 
         val message = intent.getStringExtra(EXTRA_MESSAGE)
 
+        val displayMessage = "WPM: $message"
 
         val textView: TextView = findViewById(R.id.textview_wpm)
-        textView.text = message
+        textView.text = displayMessage
 
         // Insert score into the local database
         wpmViewModel = ViewModelProviders.of(this).get(WPMViewModel::class.java)
@@ -51,7 +52,7 @@ class GameOverActivity : AppCompatActivity() {
 
     /** On back button pressed go to ParentActivity, which is MainActivity. */
     override fun onBackPressed() {
-        NavUtils.navigateUpFromSameTask(this);
+        NavUtils.navigateUpFromSameTask(this)
     }
 
     private fun isUserSignedIn(): Boolean {
