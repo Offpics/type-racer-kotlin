@@ -27,11 +27,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: androidx.drawerlayout.widget.DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -40,15 +35,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        val textView: TextView = findViewById(R.id.textview_welcome)
-        textView.text = "ELDO"
         if (FirebaseAuth.getInstance().currentUser != null) {
             val headerView: View = nav_view.getHeaderView(0)
             headerView.textview_email.text = FirebaseAuth.getInstance().currentUser?.email
         }
 
-//        Log.d("1000", FirebaseAuth.getInstance().currentUser?.email)
-//        Log.d("1000", FirebaseAuth.getInstance().currentUser?.displayName)
 
         navView.setNavigationItemSelectedListener(this)
     }
@@ -62,21 +53,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -101,12 +77,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startActivity(intent)
     }
 
-    fun startLeaderboardActivity() {
+    private fun startLeaderboardActivity() {
         val intent = Intent(this, LeaderboardActivity::class.java)
         startActivity(intent)
     }
 
-    fun startOnlineActivity() {
+    private fun startOnlineActivity() {
         val intent = Intent(this, OnlineActivity::class.java)
         startActivity(intent)
     }
