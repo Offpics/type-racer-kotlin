@@ -26,7 +26,9 @@ class GameActivity : AppCompatActivity() {
 
     private val quotes: MutableList<Quote> = mutableListOf(
         Quote(text="This is a test sentence."),
-        Quote(text="This is a second test sentence.")
+        Quote(text="This is a second test sentence."),
+        Quote(text="You could substitute raspberries or any other fruit, but 99.9 percent of all the wine in the world is made from grapes, because they make the best wines."),
+        Quote(text="But the life of man is ever racing to its end, swifter than time itself, without hope of renewal, unless in the next that is limitless and infinite.")
     )
 
     private fun randomizeQuotes() {
